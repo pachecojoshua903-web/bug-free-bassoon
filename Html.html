@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Joshua Account POV</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#111;color:#e4e6eb}
+/* LOGIN */
+#loginPage{display:flex;justify-content:center;align-items:center;height:100vh}
+.login{background:#1a1a1a;padding:30px;border-radius:12px;width:260px;text-align:center}
+.login input{width:100%;margin:6px 0;padding:10px;border:none;border-radius:6px;background:#2a2a2a;color:#fff}
+.login button{width:100%;padding:10px;margin-top:10px;border:none;border-radius:6px;background:#2d88ff;color:#fff;font-weight:700}
+#error{color:#ff4d4d;font-size:13px;display:none;margin-top:8px}
+/* APP */
+#app{display:none}
+/* NAV */
+.navbar{background:#1a1a1a;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #2a2a2a}
+.navbar-title{font-weight:800}
+.navbtn{background:#2a2a2a;border:none;width:34px;height:34px;border-radius:50%;color:#fff;margin-left:8px}
+/* SEARCH */
+.search{padding:10px 14px;background:#1a1a1a;border-bottom:1px solid #2a2a2a}
+.search input{width:100%;padding:10px;border:none;border-radius:20px;background:#2a2a2a;color:#fff}
+/* LIST */
+.section{padding:12px 16px;font-size:12px;color:#888;font-weight:800}
+.chat{display:flex;padding:12px 16px;border-bottom:1px solid #1f1f1f;cursor:pointer}
+.avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;margin-right:12px;position:relative}
+.dot{position:absolute;width:13px;height:13px;border-radius:50%;background:#31a24c;bottom:2px;right:2px;border:2px solid #111}
+.info{flex:1}
+.name{font-weight:700}
+.preview{font-size:13px;color:#888}
+.time{font-size:12px;color:#888}
+.badge{background:#2d88ff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:800}
+/* CHAT WINDOW */
+.chatwin{display:none;position:fixed;inset:0;background:#111;flex-direction:column}
+.chathead{background:#1a1a1a;padding:10px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a}
+.back{font-size:22px;background:none;border:none;color:#2d88ff}
+.msgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:75%}
+.mine{align-self:flex-end}
+.theirs{align-self:flex-start}
+.bubble{padding:10px 14px;border-radius:20px;font-size:14px}
+.mine .bubble{background:#2d88ff;color:#fff;border-bottom-right-radius:4px}
+.theirs .bubble{background:#2a2a2a;border-bottom-left-radius:4px}
+.meta{font-size:11px;color:#888;margin-top:2px}
+/* INPUT */
+.inputbar{background:#1a1a1a;padding:10px 16px;display:flex;gap:10px;border-top:1px solid #2a2a2a}
+.inputbar input{flex:1;padding:10px;border:none;border-radius:20px;background:#2a2a2a;color:#fff}
+.send{width:38px;height:38px;border:none;border-radius:50%;background:#2d88ff;color:#fff}
+/* BOTTOM NAV */
+.bottom{position:fixed;bottom:0;left:0;right:0;height:56px;background:#1a1a1a;border-top:1px solid #2a2a2a;display:flex}
+.bottom button{flex:1;background:none;border:none;color:#888}
+.active{color:#2d88ff}
+.spacer{height:70px}
+.notification{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#2d88ff;color:#fff;padding:20px;border-radius:12px;font-weight:700;font-family:sans-serif;display:none;z-index:9999;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+<div class="login">
+<h2>Joshua Account POV</h2>
+<input id="u" placeholder="Username">
+<input id="p" type="password" placeholder="Password">
+<button onclick="login()">Log in</button>
+<div id="error">Wrong login</div>
+</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="navbar">
+<div class="navbar-title">ABNEGATION MIL 11</div>
+<div>
+<button class="navbtn">✏️</button>
+<button class="navbtn">⚙️</button>
+</div>
+</div>
+
+<div class="search">
+<input placeholder="🔍 Search messages">
+</div>
+
+<div class="section">RECENT MESSAGES</div>
+
+<!-- ROMARS -->
+<div class="chat" onclick="openChat('romars')">
+<div class="avatar" style="background:#27ae60">R<div class="dot"></div></div>
+<div class="info">
+<div class="name">Romars Evangelista</div>
+<div class="preview">Reacted ❤️ to your message</div>
+</div>
+<div class="time">5:08 PM</div>
+</div>
+
+<!-- PAGBASA -->
+<div class="chat" onclick="openChat('pagbasa')">
+<div class="avatar" style="background:#8e44ad">G<div class="dot"></div></div>
+<div class="info">
+<div class="name">G11- Abnegation PAGBASA</div>
+<div class="preview">Romars Evangelista added you...</div>
+</div>
+<div class="time">5:07 PM</div>
+</div>
+
+<!-- 11-ABNEGATION STUDENT -->
+<div class="chat" onclick="openChat('student')">
+<div class="avatar" style="background:#2980b9">1<div class="dot"></div></div>
+<div class="info">
+<div class="name">11-ABNEGATION STUDENT</div>
+<div class="preview">May klase guys?</div>
+</div>
+<div class="time">4:22 PM</div>
+</div>
+
+<!-- JOSH NOTES -->
+<div class="chat" onclick="notifyJoshNotes()">
+<div class="avatar" style="background:#e67e22">J</div>
+<div class="info">
+<div class="name">JOSH NOTES</div>
+<div class="preview">Click</div>
+</div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="bottom">
+<button class="active">💬 Chats</button>
+<button>👥 Members</button>
+<button>📢 Announce</button>
+<button>🙂</button>
+</div>
+</div>
+
+<!-- CHAT WINDOW -->
+<div class="chatwin" id="chatwin">
+<div class="chathead">
+<button class="back" onclick="closeChat()">←</button>
+<div id="chatIcon" class="avatar"></div>
+<div id="chatName"></div>
+</div>
+
+<div class="msgs" id="msgs"></div>
+
+<div class="inputbar">
+<input placeholder="Type message" id="freeInput">
+<button class="send" onclick="sendMessage()">➤</button>
+</div>
+</div>
+
+<div class="notification" id="notif">This account is not currently available</div>
+
+<script>
+// LOGIN
+function login(){
+if(u.value==="Joshua"&&p.value==="Pacheco"){
+loginPage.style.display="none"
+app.style.display="block"
+}else error.style.display="block"
+}
+
+// CHAT OPEN
+function openChat(type){
+app.style.display="none"
+chatwin.style.display="flex"
+msgs.innerHTML=""
+if(type==="romars"){
+chatName.innerText="Romars Evangelista"
+chatIcon.style.background="#27ae60"
+chatIcon.innerText="R"
+add("mine","Bruno mars, paki forward daw sidtong ginpahimo sa inyo ni ma'am.")
+add("mine","Tag kun may kailangan ka sa research nyo, mag sabi ka la. ❤️ Reacted")
+add("theirs","Sakay ma'am Hannah po?")
+add("mine","Yup")
+add("theirs","Btw thankyou kuya josh")
+add("theirs","↪ Replied to: Tag kun may kailangan ka sa research nyo, mag sabi ka la.")
+add("theirs","sagutan ang Subukin, Tuklasin, Pagsasanay A,B,C, Isaisip, Isagawa,Tayahin,")
+add("theirs","Magandang hapon, para sa inyong karagdagang gawain...")
+add("mine","Thank You Bruno❤️")
+}
+if(type==="pagbasa"){
+chatName.innerText="Abnegation Pagbasa"
+chatIcon.style.background="#8e44ad"
+chatIcon.innerText="G"
+add("theirs","Group chat opened.")
+}
+if(type==="student"){
+chatName.innerText="11-ABNEGATION STUDENT"
+chatIcon.style.background="#2980b9"
+chatIcon.innerText="1"
+add("theirs","May klase guys?")
+add("theirs","Wara")
+add("theirs","Sa monday daw balik")
+add("theirs","Awts gege")
+add("theirs","May prac")
+add("theirs","Igwa 9 an ct")
+add("theirs","San o ngani ipapasa an research?")
+add("theirs","March 3")
+add("theirs","March 3?? March 2 talaga yun teh")
+add("theirs","Aw oo gali sarry")
+add("theirs","Damo damo pang ipapasa HAHAHAHA")
+add("theirs","Amo nganii")
+}
+
+}
+
+// ADD MESSAGE
+function add(side,text){
+msgs.innerHTML+=`<div class="msg ${side}"><div class="bubble">${text}</div></div>`
+}
+
+// SEND FREE MESSAGE
+function sendMessage(){
+let val=document.getElementById("freeInput").value
+if(val.trim()!==""){add("mine",val);document.getElementById("freeInput").value=""}
+}
+
+// CLOSE CHAT
+function closeChat(){chatwin.style.display="none";app.style.display="block"}
+
+// JOSH NOTES NOTIF
+function notifyJoshNotes(){
+notif.style.display="block"
+setTimeout(()=>{notif.style.display="none"},2500)
+}
+
+// BACK BUTTON LOGOUT
+window.onpopstate=function(){loginPage.style.display="flex";app.style.display="none";chatwin.style.display="none"}
+</script>
+</body>
+</html>
